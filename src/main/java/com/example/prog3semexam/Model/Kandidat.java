@@ -29,16 +29,25 @@ public class Kandidat {
 
     @Transient
     private int partiId;
-    //@JsonCreator
+
+    @Transient
+    private String partiNavn;
     public Kandidat() {
     }
 
-    public Kandidat(int id, String fornavn, String efternavn, Parti parti, int antalStemmer) {
-        this.id = id;
+    public Kandidat(String fornavn, String efternavn, Parti parti, int antalStemmer) {
         this.fornavn = fornavn;
         this.efternavn = efternavn;
         this.parti = parti;
         this.antalStemmer = antalStemmer;
+    }
+
+    public String getPartiNavn() {
+        return partiNavn;
+    }
+
+    public void setPartiNavn() {
+        this.partiNavn = parti.getName();
     }
 
     public int getPartiId() {

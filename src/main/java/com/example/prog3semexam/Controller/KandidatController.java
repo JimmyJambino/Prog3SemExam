@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/kandidat")
+@CrossOrigin(origins = "*")
 public class KandidatController {
 
     private KandidatRepo kandidatRepo;
@@ -17,37 +18,34 @@ public class KandidatController {
         this.kandidatRepo = kandidatRepo;
     }
 
-
-    // DONE
     @GetMapping("/")
     public ResponseEntity<List<Kandidat>> getAll() {
         List<Kandidat> list = kandidatRepo.findAll();
         for(Kandidat kandidat : list) {
             kandidat.setPartyId();
+            kandidat.setPartiNavn();
         }
         return ResponseEntity.ok(list);
     }
 
-    // DONE
     @GetMapping("/{id}")
     public ResponseEntity<Kandidat> getOne(@PathVariable int id) {
         if(kandidatRepo.findById(id).isPresent()) {
             Kandidat kandidat = kandidatRepo.findById(id).get();
-            //kandidat.setPartyId();
+            kandidat.setPartyId();
+            kandidat.setPartiNavn();
             return ResponseEntity.ok(kandidat);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    // DONE
     @PostMapping("/")
     public ResponseEntity<Kandidat> addKandidat(@RequestBody Kandidat kandidat) {
         kandidatRepo.save(kandidat);
         return ResponseEntity.ok(kandidat);
     }
 
-    // DONE
     @PutMapping(value = "/{id}")
     public ResponseEntity<Kandidat> updateKandidat(@RequestBody Kandidat kandidat, @PathVariable int id){
         if(kandidatRepo.findById(id).isPresent()) {
@@ -58,7 +56,6 @@ public class KandidatController {
         }
     }
 
-    // DONE
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Kandidat> deleteKandidat(@PathVariable("id") int id){
         if(kandidatRepo.findById(id).isPresent()) {
