@@ -21,7 +21,7 @@ public class Kandidat {
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="partiId", nullable = false) // Gotta be foreign key
+    @JoinColumn(name="partiId", nullable = false)
     private Parti parti;
 
     @Column(name = "antalStemmer", nullable = false, columnDefinition = "int default 0")

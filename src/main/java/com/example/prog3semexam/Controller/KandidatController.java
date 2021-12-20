@@ -1,7 +1,6 @@
 package com.example.prog3semexam.Controller;
 
 import com.example.prog3semexam.Model.Kandidat;
-import com.example.prog3semexam.Repository.KandidatRepo;
 import com.example.prog3semexam.Service.KandidatService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

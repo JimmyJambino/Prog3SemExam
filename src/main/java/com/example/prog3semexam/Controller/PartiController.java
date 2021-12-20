@@ -2,10 +2,7 @@ package com.example.prog3semexam.Controller;
 
 import com.example.prog3semexam.Model.Kandidat;
 import com.example.prog3semexam.Model.Parti;
-import com.example.prog3semexam.Repository.KandidatRepo;
-import com.example.prog3semexam.Repository.PartiRepo;
 import com.example.prog3semexam.Service.PartiService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
