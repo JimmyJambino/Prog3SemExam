@@ -4,6 +4,7 @@ import com.example.prog3semexam.Model.Kandidat;
 import com.example.prog3semexam.Model.Parti;
 import com.example.prog3semexam.Repository.KandidatRepo;
 import com.example.prog3semexam.Repository.PartiRepo;
+import com.example.prog3semexam.Service.PartiService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,33 +17,24 @@ import java.util.Set;
 @CrossOrigin(origins = "*")
 public class PartiController {
 
-    private PartiRepo partiRepo;
+    private PartiService partiService;
 
-    public PartiController(PartiRepo partiRepo){
-        this.partiRepo = partiRepo;
+    public PartiController(PartiService partiService){
+        this.partiService = partiService;
     }
 
     @GetMapping("/")
     public ResponseEntity<List<Parti>> getAll() {
-        List<Parti> list = partiRepo.findAll(); //TODO: move down
-        return ResponseEntity.status(HttpStatus.OK).body(list);
+        return partiService.getAll();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Parti> getParti(@PathVariable int id) {
-        if(partiRepo.findById(id).isPresent()) {
-            return ResponseEntity.ok(partiRepo.findById(id).get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return partiService.getParti(id);
     }
 
     @GetMapping("/{id}/kandidater")
     public ResponseEntity<Set<Kandidat>> getKandidatFromParti(@PathVariable int id) {
-        if(partiRepo.findById(id).isPresent()) {
-            return ResponseEntity.ok(partiRepo.findById(id).get().getKandidatSet());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return getKandidatFromParti(id);
     }
 }
